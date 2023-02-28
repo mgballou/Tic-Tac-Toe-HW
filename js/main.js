@@ -47,7 +47,15 @@ function render() {
 }
 
 function renderMessage() {
+    if (winner === null) {
     messageEl.textContent = `${colors[currentPlayer].toUpperCase()}'s turn to play.`
+    } else if (winner === 't') {
+    messageEl.textContent = "Tie game!"
+    } else if (winner){
+        messageEl.textContent = `The winner is ${colors[winner].toUpperCase()}`
+    }
+
+
 
 }
 
@@ -67,9 +75,12 @@ function handleClick(evt) {
         if (boardArray[evt.target.id]) {
             return
         }
+        if (winner) {
+            return
+        }
         boardArray[evt.target.id] = currentPlayer
-        console.log(boardArray)
         advanceTurn()
+        checkWin()
         render()
 
     }
@@ -80,6 +91,16 @@ function advanceTurn() {
         } else if (currentPlayer === -1) {
             currentPlayer = 1
         }
+}
+
+function checkWin() {
+    winConditions.forEach(function(combo) {
+        combo.forEach(function(index) {
+            let positionsTotal = 0
+            positionsTotal = positionsTotal + boardArray[index]
+
+        }))
+    })
 }
 
 init()
